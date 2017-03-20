@@ -11,7 +11,7 @@ The project is currently in its first phase, where we are creating a command lin
 **Authors**
 - **Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
 - **Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
-
+- **Matthew Plemmons**, \<matthew.plemmons@holbertonschool.com>, @matthew_lee_p
 ----------------------------------------
 
 In order to begin the console, you can run either 'python3 console.py' or './console.py' in the command line.
