@@ -31,7 +31,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Create a new Basemodel"""
-        import pdb; pdb.set_trace()
         args = args.split()
         obj_id = ""
         if len(args) < 1:
@@ -39,26 +38,17 @@ class HBNBCommand(cmd.Cmd):
         else:
             if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
                 model_attrs = self.get_attrs(args[1:])
-                pdb.set_trace()
                 new_obj = eval(args[0])()
                 obj_id = new_obj.id
-                
                 for key, val in model_attrs.items():
                     new_obj.__setattr__(key, val) 
-                    #setattr(new_obj.id, key, val)
                 print(obj_id)
                 new_obj.save()
             else:
                 return
-        #obj_id
-        #if kwargs:
-        #    all_objs = storage.all()
-        #    for k in kwargs:
-        #        setattr(all_objs[obj_id], k, kwargs[k])
-        #        storage.save()
-        
+
     def get_attrs(self, args):
-        #import pdb; pdb.set_trace()
+        """Pull class model attributes from input arguments"""
         model_attrs = {}
         for arg in args:
             if "=" in arg:
@@ -79,7 +69,6 @@ class HBNBCommand(cmd.Cmd):
                         continue
                 model_attrs[key] = val
         return (model_attrs)
-
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
@@ -240,8 +229,6 @@ class HBNBCommand(cmd.Cmd):
 
     def class_exec(self, cls_name, args):
         """Wrapper function for <class name>.action()"""
-        import pdb; pdb.set_trace()
-
         if args[:6] == '.all()':
             self.do_all(cls_name)
         elif args[:6] == '.show(':
