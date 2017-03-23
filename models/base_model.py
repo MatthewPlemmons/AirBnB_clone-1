@@ -53,4 +53,5 @@ class BaseModel:
         return dupe
 
     def delete(self):
+        """delete current instance from the storage"""
         models.storage.delete(self.id)
