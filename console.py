@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 import cmd
-from models import *
+from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.state import State
+from models.review import Review
+from models.user import User
+from models.__init__ import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,16 +31,55 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """Create a new Basemodel"""
+        import pdb; pdb.set_trace()
         args = args.split()
-        if len(args) != 1:
+        obj_id = ""
+        if len(args) < 1:
             print("** class name missing **")
         else:
             if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
+                model_attrs = self.get_attrs(args[1:])
+                pdb.set_trace()
                 new_obj = eval(args[0])()
-                print(new_obj.id)
+                obj_id = new_obj.id
+                
+                for key, val in model_attrs.items():
+                    new_obj.__setattr__(key, val) 
+                    #setattr(new_obj.id, key, val)
+                print(obj_id)
                 new_obj.save()
             else:
                 return
+        #obj_id
+        #if kwargs:
+        #    all_objs = storage.all()
+        #    for k in kwargs:
+        #        setattr(all_objs[obj_id], k, kwargs[k])
+        #        storage.save()
+        
+    def get_attrs(self, args):
+        #import pdb; pdb.set_trace()
+        model_attrs = {}
+        for arg in args:
+            if "=" in arg:
+                new_arg = arg.replace("=", " ")
+                new_arg = new_arg.split()
+                key = new_arg[0]
+                val = new_arg[1]
+                if '"' in [val[0], val[-1]]:
+                    val = val[1:-1]
+                    val = val.replace('"', r'\"')
+                    val = val.replace("_", " ")
+                elif "." in val:
+                    val = float(val)
+                else: 
+                    try:
+                        val = int(val)
+                    except:
+                        continue
+                model_attrs[key] = val
+        return (model_attrs)
+
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
@@ -194,6 +240,8 @@ class HBNBCommand(cmd.Cmd):
 
     def class_exec(self, cls_name, args):
         """Wrapper function for <class name>.action()"""
+        import pdb; pdb.set_trace()
+
         if args[:6] == '.all()':
             self.do_all(cls_name)
         elif args[:6] == '.show(':
