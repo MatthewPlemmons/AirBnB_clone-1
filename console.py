@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
                 new_obj = eval(args[0])()
                 obj_id = new_obj.id
                 for key, val in model_attrs.items():
-                    new_obj.__setattr__(key, val) 
+                    new_obj.__setattr__(key, val)
                 print(obj_id)
                 new_obj.save()
             else:
@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
                     val = val.replace("_", " ")
                 elif "." in val:
                     val = float(val)
-                else: 
+                else:
                     try:
                         val = int(val)
                     except:
