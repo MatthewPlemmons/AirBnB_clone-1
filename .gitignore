@@ -2,3 +2,5 @@
 __pycache__
 *.pyc
 file.json
+*.json
+test_params_create
