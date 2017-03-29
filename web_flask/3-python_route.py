@@ -7,13 +7,16 @@ app = Flask(__name__)
 def hello_hbnb():
     return 'Hello HBNB!'
 
+
 @app.route('/hbnb')
 def hbnb():
     return 'HBNB'
 
+
 @app.route('/c/<text>')
 def c_is_fun(text):
     return 'C ' + text.replace('_', ' ')
+
 
 @app.route('/python/')
 @app.route('/python/<text>')
