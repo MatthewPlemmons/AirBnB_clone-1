@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
                 new_arg = new_arg.split()
                 key = new_arg[0]
                 val = new_arg[1]
-                if '"' in [val[0], val[-1]]:
+                if '"' in val[0] and '"' in val[-1]:
                     val = val[1:-1]
                     val = val.replace('"', r'\"')
                     val = val.replace("_", " ")
