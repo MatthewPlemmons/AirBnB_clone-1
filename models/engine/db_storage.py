@@ -22,14 +22,15 @@ class DBStorage():
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        classes = ["Amenity", "City", "Place", "Review", "State", "User"]
+        classes = {"Amenity": Amenity, "City": City, "Place": Place,
+                   "Review": Review, "State": State, "User": User}
         objs = {}
-        if cls in classes:
-            for obj in self.__session.query(cls):
+        if cls:
+            for obj in self.__session.query(classes[cls]):
                 objs[obj.id] = obj
         else:
             for c in classes:
-                for obj in self.__session.query(c):
+                for obj in self.__session.query(classes[c]):
                     objs[obj.id] = obj
         return objs
 
