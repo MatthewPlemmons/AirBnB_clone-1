@@ -22,7 +22,7 @@ class BaseModel:
             for k in args[0]:
                 setattr(self, k, args[0][k])
         else:
-            self.created_at = datetime.datetime.now()
+            self.created_at = datetime.now()
             self.id = str(uuid.uuid4())
         for k in kwargs:
             self.k = kwargs[k]
@@ -30,7 +30,7 @@ class BaseModel:
 
     def save(self):
         """method to update self"""
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
 
