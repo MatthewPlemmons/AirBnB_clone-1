@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 from models import *
-from sqlalchemy import *
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship, backref
+from models.base_model import BaseModel, Base
 
 
 class User(BaseModel, Base):
@@ -11,7 +12,7 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
-    places = relationship("Place", cascade="delete", backref="user")
+    places = relationship("Place", backref="user")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

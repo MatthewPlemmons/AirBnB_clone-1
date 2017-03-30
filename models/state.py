@@ -2,6 +2,7 @@
 from models import *
 from sqlalchemy import *
 from sqlalchemy.orm import relationship
+from models.base_model import BaseModel, Base
 
 
 class State(BaseModel, Base):

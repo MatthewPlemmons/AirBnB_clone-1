@@ -2,18 +2,19 @@
 import uuid
 import models
 from datetime import datetime
-from sqlalchemy.ext.declatative import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
+
 
 Base = declarative_base()
 
 
 class BaseModel:
     """The base class for all storage objects in this project"""
-    id = (String(60), nullable=False, primary_key=True)
+
+    id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(DateTime(), nullable=False, default=datetime.now())
     updated_at = Column(DateTime(), nullable=False, default=datetime.now())
-
 
     def __init__(self, *args, **kwargs):
         """initialize class object"""
@@ -42,7 +43,7 @@ class BaseModel:
     def to_json(self):
         """convert to json"""
         dupe = self.__dict__.copy()
-        try: 
+        try:
             dupe.pop("_sa_instnace_state", None)
         except:
             pass

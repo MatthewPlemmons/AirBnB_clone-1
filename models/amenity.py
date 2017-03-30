@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from models import *
 from sqlalchemy import Column, String
+from models.base_model import BaseModel, Base
 
 
 class Amenity(BaseModel, Base):
