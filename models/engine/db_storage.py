@@ -3,6 +3,7 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models import *
+from models.base_model import BaseModel, Base
 
 
 class DBStorage():
