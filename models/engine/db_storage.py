@@ -47,3 +47,6 @@ class DBStorage():
     def reload(self):
         Base.metadata.create_all(self.__engine)
         self.__session = scoped_session(sessionmaker(bind=self.__engine))
+
+    def close(self):
+        self.__session.remove()

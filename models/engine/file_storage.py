@@ -47,3 +47,6 @@ class FileStorage:
                 del FileStorage.__objects[obj.id]
             except Exception as e:
                 print("Error: {}".format(e))
+
+        def close(self):
+            self.reload()
