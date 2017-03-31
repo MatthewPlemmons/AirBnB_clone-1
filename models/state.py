@@ -7,14 +7,17 @@ from models.base_model import BaseModel, Base
 
 class State(BaseModel, Base):
     """Model for managing state data"""
-    __tablename__ = "states"
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state", cascade="delete")
 
     def __init__(self, *args, **kwargs):
         super(State, self).__init__(*args, **kwargs)
 
-    if getenv("HBNB_TYPE_STORAGE") != "db":
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        __tablename__ = "states"
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state", cascade="delete")
+    else:
+        name = ""
+
         @property
         def cities(self):
             city_list = storage.all("City").values()
