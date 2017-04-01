@@ -20,6 +20,7 @@ def states_by_id(id):
             state = s
     return render_template("9-states.html", state=state)
 
+
 @app.teardown_appcontext
 def end_session(e):
     storage.close()
