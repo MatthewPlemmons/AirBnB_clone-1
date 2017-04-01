@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from os import getenv
 import uuid
 import models
 from datetime import datetime
@@ -6,7 +7,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
 
 
-Base = declarative_base()
+if getenv("HBNB_TYPE_STORAGE") == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 
 class BaseModel:

@@ -6,7 +6,7 @@ from models import *
 from models.base_model import BaseModel, Base
 
 
-class DBStorage():
+class DBStorage:
     __engine = None
     __session = None
 
@@ -17,7 +17,8 @@ class DBStorage():
                 getenv("HBNB_MYSQL_PWD"),
                 getenv("HBNB_MYSQL_HOST"),
                 getenv("HBNB_MYSQL_DB")))
-
+        Base.metadata.create_all(self.__engine)
+        self.__session = sessionmaker(bind=self.__engine)
         if getenv("HBNB_MYSQL_ENV", None) == "test":
             Base.metadata.drop_all(self.__engine)
 
